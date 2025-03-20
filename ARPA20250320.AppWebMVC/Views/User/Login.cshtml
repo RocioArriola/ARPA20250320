@@ -4,22 +4,22 @@
     ViewData["Title"] = "Login";
 
 }
-<h1>Login</h1>
+<h1 class="text-center" style="font-family:'Cambria Math'">BIENVENIDO</h1>
 
-<h4>Usuario</h4>
+<h4 class="text-center small" style="font-family:'Cambria Math'">Registrate!!</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Login">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
+                <label asp-for="Email" class="form-label fw-bold"></label>
+                <input asp-for="Email" class="form-control shadow-sm" placeholder="Ingrese su Email" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PasswordHash" class="control-label"></label>
-                <input asp-for="PasswordHash" class="form-control" />
+                <label asp-for="PasswordHash" class="form-label fw-bold"></label>
+                <input asp-for="PasswordHash" class="form-control shadow-sm" placeholder="Ingrese su contraseña" />
                 <span asp-validation-for="PasswordHash" class="text-danger"></span>
             </div>
 

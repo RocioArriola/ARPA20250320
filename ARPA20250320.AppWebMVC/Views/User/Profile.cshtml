@@ -4,9 +4,9 @@
     ViewData["Title"] = "Profile";
 
 }
-<h1>Perfil</h1>
+<h1 class="text-center" style="font-family:'Cambria Math'">Perfil</h1>
 
-<h4>Usuario</h4>
+<h4 class="text-center small" style="font-family:'Cambria Math'">Tu usuario</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -14,26 +14,26 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="UserId" />
             <div class="form-group">
-                <label asp-for="Username" class="control-label"></label>
-                <input asp-for="Username" class="form-control" />
+                <label asp-for="Username" class="form-label fw-bold"></label>
+                <input asp-for="Username" class="form-control shadow-sm" />
                 <span asp-validation-for="Username" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
+                <label asp-for="Email" class="form-label fw-bold"></label>
+                <input asp-for="Email" class="form-control shadow-sm" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Estatus" class="control-label"></label>
-                <select asp-for="Estatus" class="form-control">
+                <label asp-for="Estatus" class="form-label fw-bold"></label>
+                <select asp-for="Estatus" class="form-control shadow-sm">
                     <option selected value="1">ACTIVO</option>
                     <option value="2">INACTIVO</option>
                 </select>
                 <span asp-validation-for="Estatus" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Role" class="control-label"></label>
-                <select asp-for="Role" class="form-control">
+                <label asp-for="Role" class="form-label fw-bold"></label>
+                <select asp-for="Role" class="form-control shadow-sm">
                     <option value="">SELECCIONAR</option>
                     <option value="ADMINISTRADOR">ADMINISTRADOR</option>
                     <option value="GERENTE">GERENTE</option>
