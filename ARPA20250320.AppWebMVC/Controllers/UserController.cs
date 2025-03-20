@@ -205,6 +205,7 @@ namespace ARPA20250320.AppWebMVC.Controllers
             return _context.Users.Any(e => e.UserId == id);
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Profile()
         {
 
@@ -214,6 +215,7 @@ namespace ARPA20250320.AppWebMVC.Controllers
             return View(usuario);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Perfil(int id, [Bind("UserId,Username,Email,Estatus,Role")] User usuario)
