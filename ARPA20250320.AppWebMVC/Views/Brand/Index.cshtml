@@ -4,13 +4,48 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1 class="display-4" style="font-family:'Cambria Math'">Buscar Marcas</h1>
+<form asp-action="Index">
+    <div class="row">
+        <div class="col-3">
+            <div class="form-group">
+                <label class="control-label">Nombre</label>
+                <input type="text" name="BrandName" class="form-control" />
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label class="control-label">País</label>
+                <textarea name="Country" class="form-control"></textarea>
+            </div>
+        </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
+    </div>
+        <div class="col-3">
+            <div class="form-group">
+                <label class="control-label">Cant. Registros</label>
+                <select name="topRegistro" class="form-control">
+                    <option selected value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="60">60</option>
+                    <option value="100">100</option>
+                    <option value="500">500</option>
+                    <option value="1000">1000</option>
+                    <option value="0">Todos</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-10">
+            <input type="submit" value="Buscar" class="btn btn-secondary btn-sm" />
+            <a class="btn btn-dark btn-sm" asp-action="Create">Ir a crear</a>
+        </div>
+    </div>
+</form>
+<hr />
+<table class="table table-striped table-bordered table-hover mt-5" id="myTable">
+    <thead class="thead-dark">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.BrandName)
@@ -30,12 +65,23 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Country)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.BrandId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.BrandId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.BrandId">Delete</a>
+            <td class="d-flex   ">
+                    <a asp-action="Edit" asp-route-id="@item.BrandId" class="btn btn-primary btn-sm me-2">Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.BrandId" class="btn btn-info btn-sm me-2">Detalles</a>
+                    <a asp-action="Delete" asp-route-id="@item.BrandId" class="btn btn-danger btn-sm ">Eliminar</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+
+             $('#myTable').DataTable({
+               "language":languageTable
+             });
+        });
+    </script>
+}
