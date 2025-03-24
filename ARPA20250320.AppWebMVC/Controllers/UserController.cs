@@ -26,9 +26,18 @@ namespace ARPA20250320.AppWebMVC.Controllers
         }
 
         // GET: User
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(User usuario, int topRegistro = 10)
         {
-            return View(await _context.Users.ToListAsync());
+            var query = _context.Users.AsQueryable();
+            if (!string.IsNullOrWhiteSpace(usuario.Username))
+                query = query.Where(s => s.Username.Contains(usuario.Username));
+            if (!string.IsNullOrWhiteSpace(usuario.Role))
+                query = query.Where(s => s.Role.Contains(usuario.Role));
+            if (topRegistro > 0)
+                query = query.Take(topRegistro);
+
+
+            return View(await query.ToListAsync());
         }
 
         // GET: User/Details/5
@@ -70,6 +79,22 @@ namespace ARPA20250320.AppWebMVC.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(user);
+        }
+
+        private string CalcularHashMD5(string passwordHash)
+        {
+            using (MD5 md5 = MD5.Create())
+            {
+                byte[] inputBytes = Encoding.UTF8.GetBytes(passwordHash);
+                byte[] hashBytes = md5.ComputeHash(inputBytes);
+
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < hashBytes.Length; i++)
+                {
+                    sb.Append(hashBytes[i].ToString("x2")); // "x2" convierte el byte en una cadena hexadecimal de dos caracteres.
+                }
+                return sb.ToString();
+            }
         }
 
         [AllowAnonymous]
@@ -249,21 +274,6 @@ namespace ARPA20250320.AppWebMVC.Controllers
             }
         }
 
-        private string CalcularHashMD5(string input)
-        {
-            using (MD5 md5 = MD5.Create())
-            {
-                byte[] inputBytes = Encoding.UTF8.GetBytes(input);
-                byte[] hashBytes = md5.ComputeHash(inputBytes);
-
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < hashBytes.Length; i++)
-                {
-                    sb.Append(hashBytes[i].ToString("x2")); // "x2" convierte el byte en una cadena hexadecimal de dos caracteres.
-                }
-                return sb.ToString();
-            }
-        }
 
     }
 }
